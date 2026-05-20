@@ -54,7 +54,7 @@
       </div>
       <div>
         <label for="customPort" id="customPortLabel" style="margin-top:0"></label>
-        <input id="customPort" class="port" placeholder="443" value="443">
+        <input id="customPort" class="port" placeholder="5001" value="5001">
       </div>
     </div>
 
@@ -135,24 +135,24 @@
       const uuid = encodeURIComponent(uuidEl.value.trim());
       const path = encodeURIComponent(pathEl.value.trim() || "/");
       const remark = encodeURIComponent(remarkEl.value.trim() || "ghtun");
-      return `vless://${uuid}@${endpoint}:${port}?encryption=none&security=tls&type=xhttp&mode=packet-up&sni=${encodeURIComponent(sniEndpoint)}&path=${path}#${remark}`;
+      return `vless://${uuid}@${endpoint}:${port}?encryption=none&security=none&type=tcp&headerType=http&host=speedtest.net&path=${path}&flow=#${remark}`;
     }
 
     function getConfigs() {
       const name = extractCodespaceName(window.location.hostname);
-      const domain = name ? `${name}-443.app.github.dev` : "YOUR-CODESPACE-NAME-443.app.github.dev";
+      const domain = name ? `${name}-5001.app.github.dev` : "YOUR-CODESPACE-NAME-5001.app.github.dev";
       const configs = [
-        { label: "Domain", host: domain, link: buildLink(domain, 443, domain) },
-        ...STATIC_IPS.map((ip) => ({ label: `IP ${ip}`, host: ip, link: buildLink(ip, 443, domain) }))
+        { label: "Domain", host: domain, link: buildLink(domain, 5001, domain) },
+        ...STATIC_IPS.map((ip) => ({ label: `IP ${ip}`, host: ip, link: buildLink(ip, 5001, domain) }))
       ];
 
       if (serverIp) {
-        configs.push({ label: `Server IP ${serverIp}`, host: serverIp, link: buildLink(serverIp, 443, domain) });
+        configs.push({ label: `Server IP ${serverIp}`, host: serverIp, link: buildLink(serverIp, 5001, domain) });
       }
 
       const customIp = customIpEl.value.trim();
       const parsedPort = parseInt(customPortEl.value.trim(), 10);
-      const customPort = (parsedPort >= 1 && parsedPort <= 65535) ? parsedPort : 443;
+      const customPort = (parsedPort >= 1 && parsedPort <= 65535) ? parsedPort : 5001;
       if (customIp) {
         configs.push({ label: `Custom ${customIp}:${customPort}`, host: customIp, link: buildLink(customIp, customPort, domain) });
       }
