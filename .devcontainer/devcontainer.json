@@ -13,12 +13,12 @@
     }
   },
   "postAttachCommand": {
-    "public": "gh codespace ports visibility 443:public 8080:public -c $CODESPACE_NAME",
+    "public": "gh codespace ports visibility 5001:public 8080:public -c $CODESPACE_NAME",
     "xray": "/usr/local/bin/start-xray.sh",
     "admin": "/usr/local/bin/start-admin.sh"
   },
   "portsAttributes": {
-    "443": {
+    "5001": {
       "label": "xray",
       "protocol": "http",
       "onAutoForward": "silent"
@@ -29,7 +29,7 @@
       "onAutoForward": "openBrowser"
     }
   },
-  "forwardPorts": [443, 8080],
+  "forwardPorts": [5001, 8080],
   "hostRequirements": {
     "cpus": 2
   }
