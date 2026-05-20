@@ -1,7 +1,7 @@
 {
   "inbounds": [
     {
-      "port": 443,
+      "port": 5001,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -12,10 +12,23 @@
         "decryption": "none"
       },
       "streamSettings": {
-        "network": "xhttp",
-        "xhttpSettings": {
-          "mode": "packet-up",
-          "path": "/"
+        "network": "tcp",
+        "tcpSettings": {
+          "header": {
+            "type": "http",
+            "request": {
+              "path": ["/"],
+              "headers": {
+                "Host": ["speedtest.net"],
+                "User-Agent": ["Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.122 Mobile Safari/537.36"],
+                "Accept-Encoding": ["gzip, deflate"],
+                "Connection": ["keep-alive"],
+                "Pragma": "no-cache"
+              },
+              "version": "1.1",
+              "method": "GET"
+            }
+          }
         }
       }
     }
